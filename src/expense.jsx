@@ -3,31 +3,35 @@ import ExpenseItem from "./components/expenseItem";
 import ExpenseForm from "./components/expenseForm";
 
 export default function Expense() {
-  const[expenses,setExpenses]=useState([])
-  const [income,setIncome]=useState(0);
-  const [outgoing,setOutgoing]=useState(0);
-  const [balance,setBalance]=useState(0);
-  useEffect(()=>{
-   fetch("http://localhost:8080/expense/all/6624f10e362f7c4e11f9dab9").then((res=>res.json())).then((res)=>setExpenses(res)).catch((error)=>console.log(error));
-  },[])
-  useEffect(()=>{
-    let income =0;
-    let expense=0;
-    expenses.forEach((exp)=>{
-      if(exp.amount>0){
-        income+=parseFloat(exp.amount);
-      }else{
-        expense+=parseFloat(exp.amount);
+  const [expenses, setExpenses] = useState([]);
+  const [income, setIncome] = useState(0);
+  const [outgoing, setOutgoing] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [dummy, setDummy] = useState(false);
+  useEffect(() => {
+    fetch("http://localhost:8080/expense/all/6624f10e362f7c4e11f9dab9")
+      .then((res) => res.json())
+      .then((res) => setExpenses(res))
+      .catch((error) => console.log(error));
+  }, [dummy]);
+  useEffect(() => {
+    let income = 0;
+    let expense = 0;
+    expenses.forEach((exp) => {
+      if (exp.amount > 0) {
+        income += parseFloat(exp.amount);
+      } else {
+        expense += parseFloat(exp.amount);
       }
-    })
-    setBalance(income+expense)
+    });
+    setBalance(income + expense);
     setIncome(income);
     setOutgoing(expense);
-  },[expenses])
-  const deleteExpense=(id)=>{
-      setExpenses(expenses.filter((exp)=>exp.id!=id));
-  }
-  const addExpense=(title,amount)=>{
+  }, [expenses]);
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter((exp) => exp.id != id));
+  };
+  const addExpense = (title, amount) => {
     // console.log({title,amount});
     // if(expenses.length!=0){
     // var newId=expenses[expenses.length-1].id+1;
@@ -43,8 +47,23 @@ export default function Expense() {
     //   amount:amount
     // }])
     // }
-    
-  }
+    fetch("http://localhost:8080/expense/new/6624f10e362f7c4e11f9dab9", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: amount,
+        category: title,
+        userID: "6624f10e362f7c4e11f9dab9",
+        date: new Date(),
+      }),
+    })
+      .then(() => setDummy((prev) => !prev))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
       <div>
@@ -61,18 +80,19 @@ export default function Expense() {
             <span>{outgoing}</span>
           </div>
         </div>
-       {/* form */}
-       <ExpenseForm addExpense={addExpense}/>
+        {/* form */}
+        <ExpenseForm addExpense={addExpense} />
       </div>
       {/* <ExpenseItem title={"test"} amount={10}/> */}
-      {
-        expenses.map(expense=><ExpenseItem
-         key={expense.id}
-         title={expense.category}
-         amount={expense.amount}
-         id={expense.id}
-         deleteExpense={deleteExpense}/>)
-      }
+      {expenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.category}
+          amount={expense.amount}
+          id={expense.id}
+          deleteExpense={deleteExpense}
+        />
+      ))}
     </>
   );
 }
