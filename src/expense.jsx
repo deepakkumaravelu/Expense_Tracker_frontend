@@ -3,22 +3,13 @@ import ExpenseItem from "./components/expenseItem";
 import ExpenseForm from "./components/expenseForm";
 
 export default function Expense() {
-  const[expenses,setExpenses]=useState([{
-    id:1,
-    title:"test",
-    amount:10
-  },{
-    id:2,
-    title:"test2",
-    amount:20
-  },{
-    id:3,
-    title:"test3",
-    amount:30
-  }])
+  const[expenses,setExpenses]=useState([])
   const [income,setIncome]=useState(0);
   const [outgoing,setOutgoing]=useState(0);
   const [balance,setBalance]=useState(0);
+  useEffect(()=>{
+   fetch("http://localhost:8080/expense/all/6624f10e362f7c4e11f9dab9").then((res=>res.json())).then((res)=>setExpenses(res)).catch((error)=>console.log(error));
+  },[])
   useEffect(()=>{
     let income =0;
     let expense=0;
@@ -37,21 +28,22 @@ export default function Expense() {
       setExpenses(expenses.filter((exp)=>exp.id!=id));
   }
   const addExpense=(title,amount)=>{
-    console.log({title,amount});
-    if(expenses.length!=0){
-    var newId=expenses[expenses.length-1].id+1;
-    setExpenses([...expenses,{
-      id:newId,
-      title:title,
-      amount:amount
-    }])}
-    else{
-    setExpenses([{
-      id:1,
-      title:title,
-      amount:amount
-    }])
-    }
+    // console.log({title,amount});
+    // if(expenses.length!=0){
+    // var newId=expenses[expenses.length-1].id+1;
+    // setExpenses([...expenses,{
+    //   id:newId,
+    //   title:title,
+    //   amount:amount
+    // }])}
+    // else{
+    // setExpenses([{
+    //   id:1,
+    //   title:title,
+    //   amount:amount
+    // }])
+    // }
+    
   }
   return (
     <>
@@ -76,7 +68,7 @@ export default function Expense() {
       {
         expenses.map(expense=><ExpenseItem
          key={expense.id}
-         title={expense.title}
+         title={expense.category}
          amount={expense.amount}
          id={expense.id}
          deleteExpense={deleteExpense}/>)
