@@ -1,6 +1,21 @@
-const ExpenseForm = () => {
- 
+import { useState } from "react";
 
+const ExpenseForm = ({addExpense}) => {
+ const [title,setTitle]=useState("food");
+ const [amount,setAmount]=useState(-50);
+const handleSubmit=(e)=>{
+e.preventDefault();
+addExpense(title,amount);
+console.log("submitted");
+}
+const handleTitleChange=(e)=>{
+  // console.log(e.target.value)
+  setTitle(e.target.value);
+}
+const handleAmountChange=(e)=>{
+  // console.log(e.target.value);
+  setAmount(e.target.value);
+}
   return (
     <form >
       <div className="input-container">
@@ -8,6 +23,7 @@ const ExpenseForm = () => {
         <input
           type="text"
           id="title"
+          onChange={handleTitleChange}
         />
       </div>
       <div className="input-container">
@@ -15,9 +31,10 @@ const ExpenseForm = () => {
         <input
           type="number"
           id="amount"
+          onChange={handleAmountChange}
         />
       </div>
-      <button type="submit">Add Transaction</button>
+      <button type="submit" onClick={handleSubmit}>Add Transaction</button>
     </form>
   );
 };

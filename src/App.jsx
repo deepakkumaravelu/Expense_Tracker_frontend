@@ -8,8 +8,8 @@ import Expense from "./expense";
 function App() {
   return (
     <>
-      <Album />
-      {/* <Expense/> */}
+      {/* <Album /> */}
+      <Expense/>
     </>
   );
 }
