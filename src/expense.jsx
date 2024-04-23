@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExpenseItem from "./components/expenseItem";
 import ExpenseForm from "./components/expenseForm";
 
@@ -16,7 +16,23 @@ export default function Expense() {
     title:"test3",
     amount:30
   }])
-  
+  const [income,setIncome]=useState(0);
+  const [outgoing,setOutgoing]=useState(0);
+  const [balance,setBalance]=useState(0);
+  useEffect(()=>{
+    let income =0;
+    let expense=0;
+    expenses.forEach((exp)=>{
+      if(exp.amount>0){
+        income+=parseFloat(exp.amount);
+      }else{
+        expense+=parseFloat(exp.amount);
+      }
+    })
+    setBalance(income+expense)
+    setIncome(income);
+    setOutgoing(expense);
+  },[expenses])
   const deleteExpense=(id)=>{
       setExpenses(expenses.filter((exp)=>exp.id!=id));
   }
@@ -41,16 +57,16 @@ export default function Expense() {
     <>
       <div>
         <div>Expense Tracker</div>
-        <div className="balance">Balance: 0</div>
+        <div className="balance">Balance: {balance}</div>
         <div className="income-expense-container">
           <div className="income">
             <span className="title">Income</span>
-            <span>0</span>
+            <span>{income}</span>
           </div>
           <div className="block"></div>
           <div className="expense">
             <span className="title">Expense</span>
-            <span>0</span>
+            <span>{outgoing}</span>
           </div>
         </div>
        {/* form */}
