@@ -29,7 +29,23 @@ export default function Expense() {
     setOutgoing(expense);
   }, [expenses]);
   const deleteExpense = (id) => {
-    setExpenses(expenses.filter((exp) => exp.id != id));
+    // setExpenses(expenses.filter((exp) => exp.id != id));
+    fetch("http://localhost:8080/expense/delete/6624f10e362f7c4e11f9dab9", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: amount,
+        category: title,
+        userID: "6624f10e362f7c4e11f9dab9",
+        date: new Date(),
+      }),
+    })
+      .then(() => setDummy((prev) => !prev))
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const addExpense = (title, amount) => {
     // console.log({title,amount});
