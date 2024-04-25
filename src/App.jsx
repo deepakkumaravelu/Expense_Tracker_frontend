@@ -4,12 +4,38 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { Album } from "./album";
 import Expense from "./expense";
+import Login from "../Login";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+import { useCookies } from "react-cookie";
+
+const ProtectedRoute = ({ children }) => {
+  const [cookies] = useCookies();
+  return cookies.token ? children : <Navigate to="/login" />;
+};
+const routes = createBrowserRouter([
+  {
+    path: "/expense",
+    // Component:Expense,
+    element: (
+      <ProtectedRoute>
+        <Expense />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/",
+    Component: Login,
+  },
+]);
 
 function App() {
   return (
     <>
-      {/* <Album /> */}
-      <Expense/>
+      <RouterProvider router={routes} />
     </>
   );
 }
