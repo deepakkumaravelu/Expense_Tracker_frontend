@@ -9,7 +9,7 @@ function Signup() {
       const username=document.querySelector(".username").value;
       const email=document.querySelector(".email").value;
       const password=document.querySelector(".password").value;
-      const SignupResponse=await fetch('http://localhost:8080/user/new',{
+      const SignupResponse=await fetch('https://expense-tracker-backend-p07p.onrender.com/user/new',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

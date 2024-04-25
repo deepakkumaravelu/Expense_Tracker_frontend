@@ -13,7 +13,7 @@ export default function Login() {
     event.preventDefault();
     // Write API call here
     try {
-      const loginResponse = await fetch("http://localhost:8080/user/login", {
+      const loginResponse = await fetch("https://expense-tracker-backend-p07p.onrender.com/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

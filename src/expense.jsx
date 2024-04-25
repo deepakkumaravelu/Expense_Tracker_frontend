@@ -14,7 +14,7 @@ export default function Expense() {
   const [cookies]=useCookies(['token'])
   const [dummy, setDummy] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:8080/expense/all/${cookies.userId}`,{
+    fetch(`https://expense-tracker-backend-p07p.onrender.com/expense/all/${cookies.userId}`,{
       headers:{
         'Authorization':`Bearer ${cookies.token}`
       }
@@ -39,7 +39,7 @@ export default function Expense() {
   }, [expenses]);
   const deleteExpense = (id) => {
     // setExpenses(expenses.filter((exp) => exp.id != id));
-    fetch(`http://localhost:8080/expense/delete/${id}`, {
+    fetch(`https://expense-tracker-backend-p07p.onrender.com/expense/delete/${id}`, {
       method: "DELETE",
       headers:{
         'Authorization':`Bearer ${cookies.token}`
@@ -86,7 +86,7 @@ export default function Expense() {
     //   amount:amount
     // }])
     // }
-    fetch(`http://localhost:8080/expense/new/${cookies.userId}`, {
+    fetch(`https://expense-tracker-backend-p07p.onrender.com/expense/new/${cookies.userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
