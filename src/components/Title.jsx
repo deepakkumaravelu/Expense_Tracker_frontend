@@ -6,9 +6,8 @@ const Title = ({title,u}) => {
    
   return (
     <>
-    
     {u?<p>{title.toUpperCase()}</p>:<p>{title.toLowerCase()}</p>}
-</>
+   </>
     
   )
 }

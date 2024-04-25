@@ -10,6 +10,7 @@ setTitle("");
 setAmount(0);
 console.log("submitted");
 }
+
 const handleTitleChange=(e)=>{
   // console.log(e.target.value)
   setTitle(e.target.value);
@@ -43,4 +44,4 @@ const handleAmountChange=(e)=>{
   );
 };
 
-export default ExpenseForm;
+export  {ExpenseForm};

@@ -1,3 +1,4 @@
+
 const ExpenseItem = ({title,amount,id,deleteExpense}) => {
 
   return (
@@ -11,4 +12,4 @@ const ExpenseItem = ({title,amount,id,deleteExpense}) => {
   )
 }
 
-export default ExpenseItem
+export  {ExpenseItem}
