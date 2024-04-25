@@ -30,7 +30,7 @@ export default function Expense() {
   }, [expenses]);
   const deleteExpense = (id) => {
     // setExpenses(expenses.filter((exp) => exp.id != id));
-    fetch("http://localhost:8080/expense/delete/6624f10e362f7c4e11f9dab9", {
+    fetch(`http://localhost:8080/expense/delete/${id}`, {
       method: "DELETE"
     })
       .then(() => setDummy((prev) => !prev))
@@ -93,10 +93,10 @@ export default function Expense() {
       {/* <ExpenseItem title={"test"} amount={10}/> */}
       {expenses.map((expense) => (
         <ExpenseItem
-          key={expense.id}
+          key={expense._id}
           title={expense.category}
           amount={expense.amount}
-          id={expense.id}
+          id={expense._id}
           deleteExpense={deleteExpense}
         />
       ))}
