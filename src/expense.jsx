@@ -31,16 +31,7 @@ export default function Expense() {
   const deleteExpense = (id) => {
     // setExpenses(expenses.filter((exp) => exp.id != id));
     fetch("http://localhost:8080/expense/delete/6624f10e362f7c4e11f9dab9", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount: amount,
-        category: title,
-        userID: "6624f10e362f7c4e11f9dab9",
-        date: new Date(),
-      }),
+      method: "DELETE"
     })
       .then(() => setDummy((prev) => !prev))
       .catch((error) => {
