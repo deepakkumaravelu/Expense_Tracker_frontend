@@ -11,10 +11,11 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import Signup from "../Signup";
 
 const ProtectedRoute = ({ children }) => {
   const [cookies] = useCookies();
-  return cookies.token ? children : <Navigate to="/login" />;
+  return cookies.token ? children : <Navigate to="/" />;
 };
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
     path: "/",
     Component: Login,
   },
+  {
+    path: "/signup",
+    Component: Signup,
+  }
 ]);
 
 function App() {

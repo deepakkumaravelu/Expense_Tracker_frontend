@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import {ExpenseItem} from "./components/expenseItem";
 import {ExpenseForm} from "./components/expenseForm";
+import {Link} from "react-router-dom"
+import { useCookies } from "react-cookie";
+import Logout from "./components/Logout";
+
 
 export default function Expense() {
   const [expenses, setExpenses] = useState([]);
   const [income, setIncome] = useState(0);
   const [outgoing, setOutgoing] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [cookies]=useCookies(['token'])
   const [dummy, setDummy] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:8080/expense/all/6624f10e362f7c4e11f9dab9")
+    fetch(`http://localhost:8080/expense/all/${cookies.userId}`,{
+      headers:{
+        'Authorization':`Bearer ${cookies.token}`
+      }
+    })
       .then((res) => res.json())
       .then((res) => setExpenses(res))
       .catch((error) => console.log(error));
@@ -31,7 +40,10 @@ export default function Expense() {
   const deleteExpense = (id) => {
     // setExpenses(expenses.filter((exp) => exp.id != id));
     fetch(`http://localhost:8080/expense/delete/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers:{
+        'Authorization':`Bearer ${cookies.token}`
+      }
     })
       .then(() => setDummy((prev) => !prev))
       .catch((error) => {
@@ -74,10 +86,11 @@ export default function Expense() {
     //   amount:amount
     // }])
     // }
-    fetch("http://localhost:8080/expense/new/6624f10e362f7c4e11f9dab9", {
+    fetch(`http://localhost:8080/expense/new/${cookies.userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization':`Bearer ${cookies.token}`
       },
       body: JSON.stringify({
         amount: amount,
@@ -120,6 +133,8 @@ export default function Expense() {
           deleteExpense={deleteExpense}
         />
       ))}
+      <center><Logout/></center>
+      
     </>
   );
 }
