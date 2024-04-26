@@ -22,7 +22,7 @@ function Signup() {
       });
       const signUpData=await SignupResponse.json();
         if(signUpData.status==="success"){
-            setCookie('token',signUpData.accesstoken,{maxAge:3600})
+            setCookie('token',signUpData.accessToken,{maxAge:3600})
             setCookie('userId',signUpData.userDetails.userID,{maxAge:3600})
             const error=document.querySelector(".error");
             error.textContent="Register successful!!"
