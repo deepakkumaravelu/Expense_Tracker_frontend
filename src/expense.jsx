@@ -95,7 +95,7 @@ export default function Expense() {
       body: JSON.stringify({
         amount: amount,
         category: title,
-        userID: "6624f10e362f7c4e11f9dab9",
+        userID:cookies.userId,
         date: new Date(),
       }),
     })
