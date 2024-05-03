@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate()
   const [cookies, setCookie] = useCookies([])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     // Write API call here
     try {
       const loginResponse = await fetch(`${import.meta.env.VITE_API_URL}/user/login`, {
@@ -35,6 +37,8 @@ export default function Login() {
       }
     } catch (error) {
       console.log("API error");
+    } finally{
+        setLoading(false);
     }
   };
   const handleEmailChange = (event) => {
@@ -45,6 +49,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    {!loading ?
     <form onSubmit={handleSubmit}>
       <div className="input-container">
         <label htmlFor="email">Email</label>
@@ -66,6 +72,10 @@ export default function Login() {
       </div>
       <button type="submit">Login</button>
       <Link to="/signup">new User</Link>
-    </form>
+     
+    </form>:
+    <div><h1>loading......</h1></div>
+    }
+    </>
   );
 }
