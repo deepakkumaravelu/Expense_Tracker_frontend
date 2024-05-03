@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import './Login.css';
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -74,7 +74,14 @@ export default function Login() {
       <Link to="/signup">new User</Link>
      
     </form>:
-    <div><h1>loading......</h1></div>
+    <div className="bdy">
+      <div className="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+  </div>
     }
     </>
   );
