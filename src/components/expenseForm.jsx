@@ -39,7 +39,9 @@ const handleAmountChange=(e)=>{
           onChange={handleAmountChange}
         />
       </div>
-      <button type="submit" onClick={handleSubmit}>Add Transaction</button>
+      <button type="submit" onClick={handleSubmit} disabled={!title}>Add Transaction</button>
+
+
     </form>
   );
 };
