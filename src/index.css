@@ -3,6 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 }
+body{
+  background-color: ghostwhite;
+}
 
 /* Income / Expense container */
 .income-expense-container {
@@ -129,10 +132,47 @@ form .error {
   background-color: #f4f4f4;
   cursor: pointer;
 }
+.update-btn{
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
 .navout{
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* popup box update*/
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+.inputbox{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.updatebtn{
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;

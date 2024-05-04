@@ -71,6 +71,28 @@ export default function Expense() {
         console.log(error);
       });
   };
+  
+  const updateExpense = (title,amount,id) => {
+ 
+    fetch(`${import.meta.env.VITE_API_URL}/expense/update/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization':`Bearer ${cookies.token}`
+      },
+      body: JSON.stringify({
+        amount: amount,
+        category: title,
+        userID:cookies.userId,
+        date: new Date(),
+      }),
+    })
+      .then(() => setDummy((prev) => !prev))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div>
@@ -101,6 +123,7 @@ export default function Expense() {
           amount={expense.amount}
           id={expense._id}
           deleteExpense={deleteExpense}
+          updateExpense={updateExpense}
         />
       ))}
 
