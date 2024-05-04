@@ -129,3 +129,11 @@ form .error {
   background-color: #f4f4f4;
   cursor: pointer;
 }
+.navout{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

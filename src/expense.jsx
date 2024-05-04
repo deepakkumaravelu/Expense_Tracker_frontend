@@ -107,7 +107,10 @@ export default function Expense() {
   return (
     <>
       <div>
-        <div>Expense Tracker</div>
+        <div className="navout">
+        <div><h3>Expense Tracker</h3></div>
+        <div><Logout/></div>
+        </div>
         <div className="balance">Balance: {balance}</div>
         <div className="income-expense-container">
           <div className="income">
@@ -133,7 +136,7 @@ export default function Expense() {
           deleteExpense={deleteExpense}
         />
       ))}
-      <center><Logout/></center>
+
       
     </>
   );

@@ -14,7 +14,8 @@ const Logout = () => {
         margin: "5px",
         backgroundColor: "red",
         color: "white",
-        borderRadius: "5px"
+        border:"none",
+        borderRadius: "9px"
       }}
     >
       Logout
