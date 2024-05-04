@@ -51,6 +51,7 @@ export default function Login() {
   return (
     <>
     {!loading ?
+    <div className="outform">
     <form onSubmit={handleSubmit}>
       <div className="input-container">
         <label htmlFor="email">Email</label>
@@ -73,7 +74,8 @@ export default function Login() {
       <button type="submit">Login</button>
       <Link to="/signup">new User</Link>
      
-    </form>:
+    </form>
+    </div>:
     <div className="bdy">
       <div className="loader">
       <span></span>

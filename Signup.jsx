@@ -47,7 +47,7 @@ function Signup() {
     Password' required/>
     <button type="submit">Login</button>
     <Link to="/">Already have an account</Link>
-    <p className="error" style={{marginTop:"10px"}}>User already exist</p>
+    <p className="error" style={{marginTop:"10px", display:"none"}}>User already exist</p>
     
     </form>
     
