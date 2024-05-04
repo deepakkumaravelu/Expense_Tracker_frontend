@@ -50,42 +50,9 @@ export default function Expense() {
         console.log(error);
       });
   };
-  // const updateExpense = (id,title,amount) => {
-  //   // setExpenses(expenses.filter((exp) => exp.id != id));
 
-  //   fetch(`http://localhost:8080/expense/update/${id}`, {
-  //     method: "PATCH",
-  //         headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       amount: amount,
-  //       category: title,
-  //       userID: "6624f10e362f7c4e11f9dab9",
-  //       date: new Date(),
-  //     })
-  //   })
-  //     .then(() => setDummy((prev) => !prev))
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
   const addExpense = (title, amount) => {
-    // console.log({title,amount});
-    // if(expenses.length!=0){
-    // var newId=expenses[expenses.length-1].id+1;
-    // setExpenses([...expenses,{
-    //   id:newId,
-    //   title:title,
-    //   amount:amount
-    // }])}
-    // else{
-    // setExpenses([{
-    //   id:1,
-    //   title:title,
-    //   amount:amount
-    // }])
-    // }
+ 
     fetch(`${import.meta.env.VITE_API_URL}/expense/new/${cookies.userId}`, {
       method: "POST",
       headers: {
@@ -127,7 +94,7 @@ export default function Expense() {
         <ExpenseForm addExpense={addExpense} />
       </div>
       {/* <ExpenseItem title={"test"} amount={10}/> */}
-      {expenses.map((expense) => (
+      {expenses.slice().reverse().map((expense) => (
         <ExpenseItem
           key={expense._id}
           title={expense.category}
@@ -137,7 +104,6 @@ export default function Expense() {
         />
       ))}
 
-      
     </>
   );
 }
