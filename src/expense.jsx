@@ -92,6 +92,16 @@ export default function Expense() {
         console.log(error);
       });
   };
+  
+  const [toggle,setToggle]=useState(false);
+  const handleToggle=()=>{
+    setToggle(!toggle);
+    if(toggle){
+    document.body.style.backgroundColor= "rgb(138, 138, 138)";
+    }else{
+      document.body.style.backgroundColor="ghostwhite";
+    }
+  }
 
   return (
     <>
@@ -99,6 +109,7 @@ export default function Expense() {
         <div className="navout">
         <div><h3>Expense Tracker</h3></div>
         <div><Logout/></div>
+        {/* <span><button onClick={handleToggle}>toggle</button></span> */}
         </div>
         <div className="balance">Balance: {balance}</div>
         <div className="income-expense-container">
