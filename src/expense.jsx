@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import {ExpenseItem} from "./components/expenseItem";
 import {ExpenseForm} from "./components/expenseForm";
-import {Link} from "react-router-dom"
 import { useCookies } from "react-cookie";
 import Logout from "./components/Logout";
-
-
-export default function Expense() {
+import { createContext } from "react";
+const UserContext=createContext();
+function Expense() {
   const [expenses, setExpenses] = useState([]);
   const [income, setIncome] = useState(0);
   const [outgoing, setOutgoing] = useState(0);
@@ -103,7 +102,13 @@ export default function Expense() {
     }
   }
 
+
+  const [showUpdateForm,setShowUpdateForm] = useState(false);
+  const [title,setTitle]=useState("");
+  const [amount,setAmount]=useState(0);
+  const [id,setId]=useState(0);
   return (
+    <UserContext.Provider value={{title,setTitle,amount,setAmount,showUpdateForm,setShowUpdateForm,id,setId}}>
     <>
       <div>
         <div className="navout">
@@ -123,10 +128,8 @@ export default function Expense() {
             <span>{outgoing}</span>
           </div>
         </div>
-        {/* form */}
-        <ExpenseForm addExpense={addExpense} />
+        <ExpenseForm addExpense={addExpense}  updateExpense={updateExpense} />
       </div>
-      {/* <ExpenseItem title={"test"} amount={10}/> */}
       {expenses.slice().reverse().map((expense) => (
         <ExpenseItem
           key={expense._id}
@@ -134,10 +137,11 @@ export default function Expense() {
           amount={expense.amount}
           id={expense._id}
           deleteExpense={deleteExpense}
-          updateExpense={updateExpense}
         />
       ))}
 
     </>
+    </UserContext.Provider>
   );
 }
+export {Expense,UserContext};

@@ -1,26 +1,46 @@
-import { useState } from "react";
-
-const ExpenseForm = ({addExpense}) => {
- const [title,setTitle]=useState("");
- const [amount,setAmount]=useState(0);
-const handleSubmit=(e)=>{
-e.preventDefault();
-addExpense(title,amount);
-setTitle("");
-setAmount(0);
-console.log("submitted");
-}
-
-const handleTitleChange=(e)=>{
-  // console.log(e.target.value)
-  setTitle(e.target.value);
-}
-const handleAmountChange=(e)=>{
-  // console.log(e.target.value);
-  setAmount(e.target.value);
-}
+import { useContext,useEffect} from "react";
+import { UserContext } from "../expense";
+const ExpenseForm = ({ addExpense, updateExpense }) => {
+  //  const [title,setTitle]=useState("");
+  //  const [amount,setAmount]=useState(0);
+  const {
+    title,
+    setTitle,
+    amount,
+    setAmount,
+    showUpdateForm,
+    setShowUpdateForm,
+    id
+  } = useContext(UserContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addExpense(title, amount);
+    setTitle("");
+    setAmount(0);
+    console.log("submitted");
+  };
+  const handleSubmitUpdate = (e) => {
+    e.preventDefault();
+    updateExpense(title, amount,id);
+    setTitle("");
+    setAmount(0);
+    console.log("updated");
+    setShowUpdateForm(false);
+  };
+  useEffect(() => {
+    setTitle(title);
+    setAmount(amount);
+  }, [showUpdateForm]);
+  const handleTitleChange = (e) => {
+    // console.log(e.target.value)
+    setTitle(e.target.value);
+  };
+  const handleAmountChange = (e) => {
+    // console.log(e.target.value);
+    setAmount(e.target.value);
+  };
   return (
-    <form >
+    <form>
       <div className="input-container">
         <label htmlFor="title">Title</label>
         <input
@@ -39,11 +59,17 @@ const handleAmountChange=(e)=>{
           onChange={handleAmountChange}
         />
       </div>
-      <button type="submit" onClick={handleSubmit} disabled={!title}>Add Transaction</button>
-
-
+      {showUpdateForm ? (
+        <button type="submit" onClick={handleSubmitUpdate} disabled={!title}>
+          Update Transaction
+        </button>
+      ) : (
+        <button type="submit" onClick={handleSubmit} disabled={!title}>
+          Add Transaction
+        </button>
+      )}
     </form>
   );
 };
 
-export  {ExpenseForm};
+export { ExpenseForm };

@@ -1,6 +1,6 @@
 
 import "./App.css";
-import Expense from "./expense";
+import { Expense } from "./expense";
 import Login from "../Login";
 import {
   Navigate,

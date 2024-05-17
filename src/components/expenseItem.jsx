@@ -1,13 +1,21 @@
-import { useState } from "react";
-const ExpenseItem = ({ title, amount, id, deleteExpense ,updateExpense}) => {
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [updatedTitle, setUpdatedTitle] = useState(title);
-  const [updatedAmount, setUpdatedAmount] = useState(amount);
-
-  const handleUpdate = () => {
-    updateExpense(updatedTitle, updatedAmount,id);
-    setShowUpdateForm(false);
+import { useContext, useState } from "react";
+import { UserContext } from "../expense";
+const ExpenseItem = ({ title, amount, id, deleteExpense}) => {
+  // const [showUpdateForm, setShowUpdateForm] = useState(false);
+  // const [updatedTitle, setUpdatedTitle] = useState(title);
+  // const [updatedAmount, setUpdatedAmount] = useState(amount);
+  const {setTitle,setAmount,setShowUpdateForm,setId}=useContext(UserContext);
+  const handleUpdateContext = () => {
+    setTitle(title);
+    setAmount(amount);
+    setId(id);
+    // updateExpense(updatedTitle, updatedAmount,id);
+    setShowUpdateForm(true);
   };
+  // const handleUpdate = () => {
+  //   updateExpense(updatedTitle, updatedAmount,id);
+  //   setShowUpdateForm(false);
+  // };
 
   return (
     <div>
@@ -16,7 +24,7 @@ const ExpenseItem = ({ title, amount, id, deleteExpense ,updateExpense}) => {
         <div className="expense-title">{title}</div>
         <div className="expense-amount">{amount}</div>
       </div>
-      <button className="update-btn" onClick={() => setShowUpdateForm(true)}>Update</button>
+      <button className="update-btn" onClick={() =>handleUpdateContext()}>Update</button>
       <button
         className="delete-btn"
         onClick={() => {
@@ -30,7 +38,7 @@ const ExpenseItem = ({ title, amount, id, deleteExpense ,updateExpense}) => {
         Delete
       </button>
     </div>
-     {showUpdateForm && (
+     {/* {showUpdateForm && (
         <div className="popup-overlay">
         <div className="popup">
         <div className="inputbox">
@@ -53,7 +61,7 @@ const ExpenseItem = ({ title, amount, id, deleteExpense ,updateExpense}) => {
         </div>
       </div>
       </div>
-    )}
+    )} */}
     </div>
   );
 };
