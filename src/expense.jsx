@@ -147,10 +147,9 @@ function Expense() {
           </div>
 
           {/* <span><button onClick={handleToggle}>toggle</button></span> */}
-
           <div className="balance">Balance: {balance}</div>
-          <div className="income-expense-container">
-            <div className="income">
+          <div className="income-expense-container" >
+            <div className="income"  id="top">
               <span className="title">Income</span>
               <span>{income}</span>
             </div>

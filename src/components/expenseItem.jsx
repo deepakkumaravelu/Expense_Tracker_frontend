@@ -6,6 +6,7 @@ const ExpenseItem = ({ title, amount, id, deleteExpense}) => {
   // const [updatedAmount, setUpdatedAmount] = useState(amount);
   const {setTitle,setAmount,setShowUpdateForm,setId}=useContext(UserContext);
   const handleUpdateContext = () => {
+    document.getElementById("top").scrollIntoView({ behavior: "smooth" });
     setTitle(title);
     setAmount(amount);
     setId(id);
