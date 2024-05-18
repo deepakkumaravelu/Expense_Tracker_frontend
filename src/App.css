@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 } */
+.offline-message {
+  background-color: #FFCCCB;
+  position: fixed;
+  bottom: -50px; 
+  left: 0;
+  right: 0;
+  padding: 10px;
+  text-align: center;
+  transition: bottom 0.5s ease-in-out;
+}
+
+.offline-message.active {
+  bottom: 0; 
+}
+
