@@ -134,7 +134,7 @@ function Expense() {
     >
       <>
         <div>
-          <div className="navout" style={{ margin: "0px" }}>
+          <div className="navout">
             <div>
               <h3>Expense Tracker</h3>
             </div>
